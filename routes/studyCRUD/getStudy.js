@@ -8,13 +8,22 @@ const prisma = new PrismaClient();
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const { cursor } = req.query;
+    const { cursor, sortBy, sortOrder } = req.query;
+
+    let orderBy = {};
+    if (sortBy) {
+      orderBy[sortBy] = sortOrder === "asc" ? "asc" : "desc";
+    } else {
+      orderBy = { createAt: "desc" };
+    }
+
     const studies = await prisma.study.findMany({
-      orderBy: { createAt: "desc" },
+      orderBy,
       skip: cursor ? 1 : 0,
       take: 6,
       cursor: cursor ? { id: parseInt(cursor) } : undefined,
     });
+
     res.status(200).json(studies);
   })
 );
