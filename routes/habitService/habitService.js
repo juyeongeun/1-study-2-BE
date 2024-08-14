@@ -16,6 +16,7 @@ router.post(
         studyId: parseInt(studyId),
       },
     });
+    res.status(201).json(habit);
   })
 );
 
@@ -58,6 +59,7 @@ router.delete(
         id: parseInt(id),
       },
     });
+    res.status(204).send();
   })
 );
 

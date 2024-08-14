@@ -15,16 +15,16 @@ model Study {
   background String
   password   String
   point      Int        @default(0)
-  createAt   DateTime   @default(now())
-  reactions  Reaction[] @relation("StudyReactions")
-  habit      Habit[]    @relation("StudyHabits")
+  createdAt  DateTime   @default(now())
+  reactions  Reaction[]
+  habits     Habit[]
 }
 
 model Reaction {
   id        Int      @id @default(autoincrement())
   emoji     String
   count     Int      @default(0)
-  study     Study    @relation(fields: [studyId], references: [id], onDelete: Cascade, name: "StudyReactions")
+  study     Study    @relation(fields: [studyId], references: [id], onDelete: Cascade)
   studyId   Int
   createdAt DateTime @default(now())
 }
@@ -32,15 +32,15 @@ model Reaction {
 model Habit {
   id             Int             @id @default(autoincrement())
   habitName      String
-  study          Study           @relation(fields: [studyId], references: [id], name: "StudyHabits")
+  study          Study           @relation(fields: [studyId], references: [id])
   studyId        Int
-  completeHabilt CompleteHabit[] @relation("completeHabit")
-  createAt       DateTime        @default(now())
+  completeHabits CompleteHabit[]
+  createdAt      DateTime        @default(now())
 }
 
 model CompleteHabit {
   id        Int      @id @default(autoincrement())
-  habit     Habit    @relation(fields: [habitId], references: [id], name: "completeHabit")
+  habit     Habit    @relation(fields: [habitId], references: [id])
   habitId   Int
   createdAt DateTime @default(now())
 }
