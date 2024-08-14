@@ -30,9 +30,17 @@ model Reaction {
 }
 
 model Habit {
+  id             Int             @id @default(autoincrement())
+  habitName      String
+  study          Study           @relation(fields: [studyId], references: [id], name: "StudyHabits")
+  studyId        Int
+  completeHabilt CompleteHabit[] @relation("completeHabit")
+  createAt       DateTime        @default(now())
+}
+
+model CompleteHabit {
   id        Int      @id @default(autoincrement())
-  habitName String
-  study     Study    @relation(fields: [studyId], references: [id], name: "StudyHabits")
-  studyId   Int
-  createAt  DateTime @default(now())
+  habit     Habit    @relation(fields: [habitId], references: [id], name: "completeHabit")
+  habitId   Int
+  createdAt DateTime @default(now())
 }
