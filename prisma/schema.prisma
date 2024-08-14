@@ -25,7 +25,7 @@ model Reaction {
   id        Int      @id @default(autoincrement())
   emoji     String
   count     Int      @default(0)
-  study     Study    @relation(fields: [studyId], references: [id], onDelete: Cascade, name: "StudyReactions")
+  study     Study    @relation(fields: [studyId], references: [id], onDelete: Cascade)
   studyId   Int
   createdAt DateTime @default(now())
 }
@@ -33,10 +33,10 @@ model Reaction {
 model Habit {
   id             Int             @id @default(autoincrement())
   habitName      String
-  study          Study           @relation(fields: [studyId], references: [id], name: "StudyHabits")
+  study          Study           @relation(fields: [studyId], references: [id])
   studyId        Int
-  completeHabilt CompleteHabit[] @relation("completeHabit")
-  createAt       DateTime        @default(now())
+  completeHabits CompleteHabit[]
+  createdAt      DateTime        @default(now())
 }
 
 model CompleteHabit {
