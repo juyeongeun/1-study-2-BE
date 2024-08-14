@@ -32,7 +32,7 @@ router.get(
     if (sortBy) {
       orderBy[sortBy] = sortOrder === "asc" ? "asc" : "desc";
     } else {
-      orderBy = { createAt: "desc" }; // 기본 최신순 정렬
+      orderBy = { createdAt: "desc" }; // 기본 최신순 정렬
     }
 
     // 검색 조건 설정
