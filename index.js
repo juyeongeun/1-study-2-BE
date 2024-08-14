@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import studyRoutes from "./routes/studyService/study.js";
 import habitRoutes from "./routes/habitService/habit.js";
+import reactionRoutes from "./routes/reactionService/reaction.js";
 
 dotenv.config();
 const app = express();
@@ -32,6 +33,7 @@ app.get("/check-db", async (req, res) => {
 
 app.use("/api/studies", studyRoutes);
 app.use("/api/habits", habitRoutes);
+app.use("/api/reactions", reactionRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
