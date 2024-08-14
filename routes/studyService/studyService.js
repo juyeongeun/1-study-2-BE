@@ -5,6 +5,23 @@ import asyncHandler from "../../Common/asyncHandler.js";
 const router = express.Router();
 const prisma = new PrismaClient();
 
+router.post(
+  "/",
+  asyncHandler(async (req, res) => {
+    const { name, studyName, content, background, password } = req.body;
+    const study = await prisma.study.create({
+      data: {
+        name,
+        studyName,
+        content,
+        background,
+        password,
+      },
+    });
+    res.status(201).json(study);
+  })
+);
+
 router.get(
   "/",
   asyncHandler(async (req, res) => {
@@ -50,6 +67,31 @@ router.get(
     });
     if (!study) return res.status(404).json({ error: "study not found" });
     res.status(200).json(study);
+  })
+);
+
+router.patch(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { name, studyName, content, background, password } = req.body;
+    const study = await prisma.study.update({
+      where: { id: parseInt(id) },
+      data: { name, studyName, content, background, password },
+    });
+    if (!study) return res.status(404).json({ error: "study not found" });
+    res.status(200).json(study);
+  })
+);
+
+router.delete(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    await prisma.study.delete({
+      where: { id: parseInt(id) },
+    });
+    res.status(204).send();
   })
 );
 

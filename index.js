@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import studyRoutes from "./routes/study.js";
+import studyRoutes from "./routes/studyService/study.js";
 
 dotenv.config();
 const app = express();
