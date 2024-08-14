@@ -17,6 +17,7 @@ model Study {
   point      Int        @default(0)
   createAt   DateTime   @default(now())
   reactions  Reaction[] @relation("StudyReactions")
+  habit      Habit[]    @relation("StudyHabits")
 }
 
 model Reaction {
@@ -25,5 +26,21 @@ model Reaction {
   count     Int      @default(0)
   study     Study    @relation(fields: [studyId], references: [id], onDelete: Cascade, name: "StudyReactions")
   studyId   Int
+  createdAt DateTime @default(now())
+}
+
+model Habit {
+  id             Int             @id @default(autoincrement())
+  habitName      String
+  study          Study           @relation(fields: [studyId], references: [id], name: "StudyHabits")
+  studyId        Int
+  completeHabilt CompleteHabit[] @relation("completeHabit")
+  createAt       DateTime        @default(now())
+}
+
+model CompleteHabit {
+  id        Int      @id @default(autoincrement())
+  habit     Habit    @relation(fields: [habitId], references: [id], name: "completeHabit")
+  habitId   Int
   createdAt DateTime @default(now())
 }
