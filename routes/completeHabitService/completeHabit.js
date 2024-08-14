@@ -2,7 +2,8 @@ import express from "express";
 import completeHabitService from "./completeHabitService.js";
 
 const router = express.Router();
-router.post("/:habitId", completeHabitService);
-router.delete("/:habitId/:id", completeHabitService);
+router.get("/:studyId", completeHabitService);
+router.post("/:studyId/:habitId", completeHabitService);
+router.delete("/:studyId/:habitId/:id", completeHabitService);
 
 export default router;

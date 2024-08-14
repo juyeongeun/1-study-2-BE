@@ -5,14 +5,25 @@ import asyncHandler from "../../Common/asyncHandler.js";
 const router = express.Router();
 const prisma = new PrismaClient();
 
+router.get(
+  "/:studyId",
+  asyncHandler(async (req, res) => {
+    const { studyId } = req.params;
+    const habit = await prisma.completeHabit.findMany({
+      where: { studyId: parseInt(studyId) },
+    });
+    res.status(200).json(habit);
+  })
+);
+
 router.post(
-  "/:habitId",
+  "/:studyId/:habitId",
   asyncHandler(async (req, res) => {
     const { habitId, studyId } = req.params;
     const completeHabit = await prisma.completeHabit.create({
       data: {
-        habitId: habitId,
-        studyId: studyId,
+        habitId: parseInt(habitId),
+        studyId: parseInt(studyId),
       },
     });
     res.status(201).json(completeHabit);
@@ -20,7 +31,7 @@ router.post(
 );
 
 router.delete(
-  "/:habitId/:id",
+  "/:studyId/:habitId/:id",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
     const habit = await prisma.completeHabit.delete({
@@ -28,6 +39,7 @@ router.delete(
         id: parseInt(id),
       },
     });
+    res.status(204).send();
   })
 );
 

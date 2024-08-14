@@ -50,31 +50,6 @@ async function main() {
       point: 36,
     },
   });
-
-  const reaction1 = await prisma.reaction.create({
-    data: {
-      studyId: study1.id,
-      emoji: "smile",
-    },
-  });
-  const reaction2 = await prisma.reaction.create({
-    data: {
-      studyId: study1.id,
-      emoji: "smile",
-    },
-  });
-  const reaction3 = await prisma.reaction.create({
-    data: {
-      studyId: study1.id,
-      emoji: "Good",
-    },
-  });
-  const reaction4 = await prisma.reaction.create({
-    data: {
-      studyId: study2.id,
-      emoji: "smile",
-    },
-  });
 }
 
 main()
