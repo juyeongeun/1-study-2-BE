@@ -8,16 +8,17 @@ datasource db {
 }
 
 model Study {
-  id         Int        @id @default(autoincrement())
-  name       String
-  studyName  String
-  content    String
-  background String
-  password   String
-  point      Int        @default(0)
-  createAt   DateTime   @default(now())
-  reactions  Reaction[] @relation("StudyReactions")
-  habit      Habit[]    @relation("StudyHabits")
+  id            Int             @id @default(autoincrement())
+  name          String
+  studyName     String
+  content       String
+  background    String
+  password      String
+  point         Int             @default(0)
+  createAt      DateTime        @default(now())
+  reactions     Reaction[]      @relation("StudyReactions")
+  habit         Habit[]         @relation("StudyHabits")
+  completeHabit CompleteHabit[] @relation("StudyHabitsComplete")
 }
 
 model Reaction {
@@ -41,6 +42,8 @@ model Habit {
 model CompleteHabit {
   id        Int      @id @default(autoincrement())
   habit     Habit    @relation(fields: [habitId], references: [id], name: "completeHabit")
+  study     Study    @relation(fields: [studyId], references: [id], name: "StudyHabitsComplete")
+  studyId   Int
   habitId   Int
   createdAt DateTime @default(now())
 }
