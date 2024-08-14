@@ -8,12 +8,22 @@ datasource db {
 }
 
 model Study {
-  id         Int      @id @default(autoincrement())
+  id         Int        @id @default(autoincrement())
   name       String
   studyName  String
   content    String
   background String
   password   String
-  point      Int      @default(0)
-  createAt   DateTime @default(now())
+  point      Int        @default(0)
+  createAt   DateTime   @default(now())
+  reactions  Reaction[] @relation("StudyReactions")
+}
+
+model Reaction {
+  id        Int      @id @default(autoincrement())
+  emoji     String
+  count     Int      @default(0)
+  study     Study    @relation(fields: [studyId], references: [id], onDelete: Cascade, name: "StudyReactions")
+  studyId   Int
+  createdAt DateTime @default(now())
 }
