@@ -70,7 +70,7 @@ router.get(
   })
 );
 
-router.patch(
+router.put(
   "/:id",
   asyncHandler(async (req, res) => {
     const { id } = req.params;

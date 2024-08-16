@@ -33,10 +33,11 @@ model Reaction {
 model Habit {
   id             Int             @id @default(autoincrement())
   habitName      String
-  study          Study           @relation(fields: [studyId], references: [id], name: "StudyHabits")
   studyId        Int
+  date           DateTime        @default(now())
+  isActive       Boolean         @default(true)
   completeHabits CompleteHabit[] @relation("completeHabit")
-  createdAt      DateTime        @default(now())
+  Study          Study           @relation(fields: [studyId], references: [id], name: "StudyHabits")
 }
 
 model CompleteHabit {
