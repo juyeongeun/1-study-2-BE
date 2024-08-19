@@ -31,7 +31,8 @@ router.put(
         id: parseInt(id),
       },
       data: {
-        habitName,
+        habitName: habitName,
+        isActive: true,
       },
     });
     res.status(200).json(habit);
