@@ -8,13 +8,12 @@ const prisma = new PrismaClient();
 router.post(
   "/:studyId",
   asyncHandler(async (req, res) => {
-    const { habitName, date } = req.body;
+    const { habitName } = req.body;
     const { studyId } = req.params;
     const habit = await prisma.habit.create({
       data: {
         habitName,
         studyId: parseInt(studyId),
-        date: new Date(date),
       },
     });
     res.status(201).json(habit);
@@ -32,7 +31,6 @@ router.put(
       },
       data: {
         habitName: habitName,
-        isActive: true,
       },
     });
     res.status(200).json(habit);
@@ -46,7 +44,6 @@ router.get(
     const habits = await prisma.habit.findMany({
       where: {
         studyId: parseInt(studyId),
-        isActive: true,
       },
     });
     res.status(200).json(habits);
@@ -64,6 +61,7 @@ router.delete(
       },
       data: {
         isActive: false,
+        date: today,
       },
     });
     res.status(204).send();
