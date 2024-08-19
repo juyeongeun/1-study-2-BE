@@ -14,7 +14,7 @@ router.post(
       data: {
         habitName,
         studyId: parseInt(studyId),
-        date: new Date(date), // 습관이 시작되는 날짜
+        date: new Date(date),
       },
     });
     res.status(201).json(habit);
