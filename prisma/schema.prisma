@@ -37,13 +37,13 @@ model Habit {
   date           DateTime        @default(now())
   isActive       Boolean         @default(true)
   completeHabits CompleteHabit[] @relation("completeHabit")
-  Study          Study           @relation(fields: [studyId], references: [id], name: "StudyHabits")
+  Study          Study           @relation(fields: [studyId], references: [id], name: "StudyHabits", onDelete: Cascade)
 }
 
 model CompleteHabit {
   id        Int      @id @default(autoincrement())
   habit     Habit    @relation(fields: [habitId], references: [id], name: "completeHabit")
-  study     Study    @relation(fields: [studyId], references: [id], name: "StudyHabitsComplete")
+  study     Study    @relation(fields: [studyId], references: [id], name: "StudyHabitsComplete", onDelete: Cascade)
   studyId   Int
   habitId   Int
   createdAt DateTime @default(now())
