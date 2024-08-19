@@ -25,7 +25,7 @@ router.put(
   "/:studyId/:id",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const { habitName, date } = req.body;
+    const { habitName } = req.body;
     const habit = await prisma.habit.updateMany({
       where: {
         id: parseInt(id),
@@ -63,7 +63,6 @@ router.delete(
       },
       data: {
         isActive: false,
-        endDate: today,
       },
     });
     res.status(204).send();
