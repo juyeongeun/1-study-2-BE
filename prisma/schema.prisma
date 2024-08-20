@@ -36,6 +36,7 @@ model Habit {
   studyId        Int
   date           DateTime        @default(now())
   isActive       Boolean         @default(true)
+  endDate        DateTime?
   completeHabits CompleteHabit[] @relation("completeHabit")
   Study          Study           @relation(fields: [studyId], references: [id], name: "StudyHabits", onDelete: Cascade)
 }

@@ -60,8 +60,7 @@ router.delete(
         id: parseInt(id),
       },
       data: {
-        isActive: false,
-        date: today,
+        endDate: today,
       },
     });
     res.status(204).send();
