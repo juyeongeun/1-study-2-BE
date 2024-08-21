@@ -29,6 +29,6 @@ const clearInactiveHabits = async () => {
 };
 
 // 크론 작업: 매주 월요일 자정에 실행
-schedule("20 11 * * 3", () => {
+schedule("0 0 * * 1", () => {
   clearInactiveHabits();
 });
