@@ -2,10 +2,11 @@ import { PrismaClient } from "@prisma/client";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import studyRoutes from "./routes/studyService/study.js";
-import completeHabitRoutes from "./routes/completeHabitService/completeHabit.js";
-import habitRoutes from "./routes/habitService/habit.js";
-import reactionRoutes from "./routes/reactionService/reaction.js";
+import studyRoutes from "./routes/study.js";
+import completeHabitRoutes from "./routes/completeHabit.js";
+import habitRoutes from "./routes/habit.js";
+import reactionRoutes from "./routes/reaction.js";
+import "./Services/habitCronJobs.js";
 
 dotenv.config();
 const app = express();
