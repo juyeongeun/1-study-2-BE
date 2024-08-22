@@ -7,6 +7,7 @@ import completeHabitRoutes from "./routes/completeHabit.js";
 import habitRoutes from "./routes/habit.js";
 import reactionRoutes from "./routes/reaction.js";
 import "./Services/habitCronJobs.js";
+process.env.TZ = "Asia/Seoul";
 
 dotenv.config();
 const app = express();

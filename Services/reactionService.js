@@ -3,6 +3,7 @@ import asyncHandler from "../Common/asyncHandler.js";
 
 const prisma = new PrismaClient();
 
+// 이모지 추가하기
 export const createReaction = asyncHandler(async (req, res) => {
   const { emoji } = req.body;
   const { studyId } = req.params;
@@ -32,6 +33,7 @@ export const createReaction = asyncHandler(async (req, res) => {
   }
 });
 
+// 이모지 조회하기
 export const getReactions = asyncHandler(async (req, res) => {
   const { studyId } = req.params;
 

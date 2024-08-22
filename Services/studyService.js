@@ -1,8 +1,9 @@
-import { PrismaClient } from "@prisma/client";
-import asyncHandler from "../Common/asyncHandler.js";
+import { PrismaClient } from '@prisma/client';
+import asyncHandler from '../Common/asyncHandler.js';
 
 const prisma = new PrismaClient();
 
+// 스터디 추가하기
 export const createStudy = asyncHandler(async (req, res) => {
   const { name, studyName, content, background, password } = req.body;
   const study = await prisma.study.create({
@@ -17,46 +18,60 @@ export const createStudy = asyncHandler(async (req, res) => {
   res.status(201).json(study);
 });
 
+// 스터디 조회하기
 export const getStudies = asyncHandler(async (req, res) => {
-  const { cursor, sortBy, sortOrder, keyword } = req.query;
+  const { orderBy = 'recent', keyword, offset = 0, limit = 6 } = req.query;
 
-  let orderBy = {};
-  if (sortBy) {
-    orderBy[sortBy] = sortOrder === "asc" ? "asc" : "desc";
-  } else {
-    orderBy = { createdAt: "desc" };
+  // 정렬 기준 설정
+
+  let orderByClause;
+  switch (orderBy) {
+    case 'recent':
+      orderByClause = { createdAt: 'desc' };
+      break;
+    case 'old':
+      orderByClause = { createdAt: 'asc' };
+      break;
+    case 'highestPoints':
+      orderByClause = { point: 'desc' };
+      break;
+    case 'lowestPoints':
+      orderByClause = { point: 'asc' };
+      break;
   }
 
+  // 검색 조건 설정
   const where = keyword
     ? {
         OR: [
-          { name: { contains: keyword, mode: "insensitive" } },
-          { studyName: { contains: keyword, mode: "insensitive" } },
-          { content: { contains: keyword, mode: "insensitive" } },
+          { name: { contains: keyword, mode: 'insensitive' } },
+          { studyName: { contains: keyword, mode: 'insensitive' } },
+          { content: { contains: keyword, mode: 'insensitive' } },
         ],
       }
     : {};
 
   const studies = await prisma.study.findMany({
     where,
-    orderBy,
-    skip: cursor ? 1 : 0,
-    take: 6,
-    cursor: cursor ? { id: parseInt(cursor) } : undefined,
+    orderBy: orderByClause,
+    skip: parseInt(offset, 10),
+    take: parseInt(limit, 10),
   });
-
+  console.log('Fetched studies:', studies);
   res.status(200).json(studies);
 });
 
+// 스터디 상세 조회하기
 export const getStudyById = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const study = await prisma.study.findUnique({
     where: { id: parseInt(id) },
   });
-  if (!study) return res.status(404).json({ error: "study not found" });
+  if (!study) return res.status(404).json({ error: 'study not found' });
   res.status(200).json(study);
 });
 
+// 스터디 수정하기
 export const updateStudy = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { name, studyName, content, background, password } = req.body;
@@ -64,10 +79,11 @@ export const updateStudy = asyncHandler(async (req, res) => {
     where: { id: parseInt(id) },
     data: { name, studyName, content, background, password },
   });
-  if (!study) return res.status(404).json({ error: "study not found" });
+  if (!study) return res.status(404).json({ error: 'study not found' });
   res.status(200).json(study);
 });
 
+// 스터디 삭제하기
 export const deleteStudy = asyncHandler(async (req, res) => {
   const { id } = req.params;
   await prisma.study.delete({
