@@ -9,6 +9,5 @@ const router = express.Router();
 
 router.get("/:studyId", getCompleteHabits);
 router.post("/:studyId/:habitId", createCompleteHabit);
-router.delete("/:studyId/:habitId/:id", deleteCompleteHabit);
 
 export default router;

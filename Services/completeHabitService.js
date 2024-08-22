@@ -21,13 +21,3 @@ export const createCompleteHabit = asyncHandler(async (req, res) => {
   });
   res.status(201).json(completeHabit);
 });
-
-export const deleteCompleteHabit = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  await prisma.completeHabit.delete({
-    where: {
-      id: parseInt(id),
-    },
-  });
-  res.status(204).send();
-});
