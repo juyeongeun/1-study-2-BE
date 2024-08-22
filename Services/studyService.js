@@ -3,6 +3,7 @@ import asyncHandler from "../Common/asyncHandler.js";
 
 const prisma = new PrismaClient();
 
+// 스터디 추가하기
 export const createStudy = asyncHandler(async (req, res) => {
   const { name, studyName, content, background, password } = req.body;
   const study = await prisma.study.create({
@@ -17,6 +18,7 @@ export const createStudy = asyncHandler(async (req, res) => {
   res.status(201).json(study);
 });
 
+// 스터디 조회하기
 export const getStudies = asyncHandler(async (req, res) => {
   const { cursor, sortBy, sortOrder, keyword } = req.query;
 
@@ -48,6 +50,7 @@ export const getStudies = asyncHandler(async (req, res) => {
   res.status(200).json(studies);
 });
 
+// 스터디 상세 조회하기
 export const getStudyById = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const study = await prisma.study.findUnique({
@@ -57,6 +60,7 @@ export const getStudyById = asyncHandler(async (req, res) => {
   res.status(200).json(study);
 });
 
+// 스터디 수정하기
 export const updateStudy = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { name, studyName, content, background, password } = req.body;
@@ -68,6 +72,7 @@ export const updateStudy = asyncHandler(async (req, res) => {
   res.status(200).json(study);
 });
 
+// 스터디 삭제하기
 export const deleteStudy = asyncHandler(async (req, res) => {
   const { id } = req.params;
   await prisma.study.delete({

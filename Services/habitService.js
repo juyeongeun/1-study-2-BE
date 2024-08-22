@@ -3,6 +3,7 @@ import asyncHandler from "../Common/asyncHandler.js";
 
 const prisma = new PrismaClient();
 
+// 습관 추가하기
 export const createHabit = asyncHandler(async (req, res) => {
   const { habitName } = req.body;
   const { studyId } = req.params;
@@ -15,6 +16,7 @@ export const createHabit = asyncHandler(async (req, res) => {
   res.status(201).json(habit);
 });
 
+// 습관명 수정하기
 export const updateHabit = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { habitName } = req.body;
@@ -29,6 +31,7 @@ export const updateHabit = asyncHandler(async (req, res) => {
   res.status(200).json(habit);
 });
 
+// 습관 조회하기
 export const getHabits = asyncHandler(async (req, res) => {
   const { studyId } = req.params;
   const habits = await prisma.habit.findMany({
@@ -39,6 +42,7 @@ export const getHabits = asyncHandler(async (req, res) => {
   res.status(200).json(habits);
 });
 
+// 습관 삭제하기
 export const deleteHabit = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const today = new Date();
