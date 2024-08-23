@@ -51,14 +51,16 @@ export const getStudies = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const studies = await prisma.study.findMany({
+  const totalCount = await prisma.study.count({ where });
+
+  const study = await prisma.study.findMany({
     where,
     orderBy: orderByClause,
     skip: parseInt(offset, 10),
     take: parseInt(limit, 10),
   });
-  console.log('Fetched studies:', studies);
-  res.status(200).json(studies);
+  console.log('Fetched studies:', study);
+  res.status(200).json({ study, totalCount });
 });
 
 // 스터디 상세 조회하기
