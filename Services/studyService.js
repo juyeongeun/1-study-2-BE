@@ -53,11 +53,15 @@ export const getStudies = asyncHandler(async (req, res) => {
 
   const totalCount = await prisma.study.count({ where });
 
+  console.log(orderBy);
   const study = await prisma.study.findMany({
     where,
     orderBy: orderByClause,
     skip: parseInt(offset, 10),
     take: parseInt(limit, 10),
+    include: {
+      reaction: true,
+    },
   });
   console.log('Fetched studies:', study);
   res.status(200).json({ study, totalCount });
