@@ -6,27 +6,21 @@ export const setPoint = async (req, res) => {
   const point = parseInt(req.body.point);
 
   try {
-    await prisma.$transaction(async (prisma) => {
-      const currentStudy = await prisma.study.findUnique({
-        where: { id },
-      });
-      const updateStudy = await prisma.study.update({
-        where: { id },
-        data: {
-          name: currentStudy.name,
-          studyName: currentStudy.studyName,
-          content: currentStudy.content,
-          background: currentStudy.background,
-          password: currentStudy.password,
-          point,
-        },
-      });
-      if (currentStudy & updateStudy) {
-        return res.status(201).send("ok");
-      } else {
-        return res.status(304).send("fail:(");
-      }
+    const currentStudy = await prisma.study.findUnique({
+      where: { id },
     });
+    const updateStudy = await prisma.study.update({
+      where: { id },
+      data: {
+        name: currentStudy.name,
+        studyName: currentStudy.studyName,
+        content: currentStudy.content,
+        background: currentStudy.background,
+        password: currentStudy.password,
+        point,
+      },
+    });
+    return res.status(201).send(updateStudy);
   } catch (e) {
     console.log(e);
     return res.status(500).send("server error!");
