@@ -101,7 +101,6 @@
 - **공통 컴포넌트 구현**
   - NavBar의 레이아웃
   - main 공통 컴포넌트
-  - body 배경색
 
 **스터디 목록 조회**
 <a href='https://ifh.cc/v-RvKCMg' target='_blank'><img src='https://ifh.cc/g/RvKCMg.jpg' border='0'></a>
