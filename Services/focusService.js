@@ -21,11 +21,7 @@ export const setPoint = async (req, res) => {
           point,
         },
       });
-      if (currentStudy & updateStudy) {
-        return res.status(201).send("ok");
-      } else {
-        return res.status(304).send("fail:(");
-      }
+      return res.status(201).send(updateStudy);
     });
   } catch (e) {
     console.log(e);
