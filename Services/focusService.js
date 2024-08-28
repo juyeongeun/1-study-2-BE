@@ -28,6 +28,7 @@ export const setPoint = async (req, res) => {
       }
     });
   } catch (e) {
-    return res.status(e.response.status).send(e.response.message);
+    console.log(e);
+    return res.status(500).send("server error!");
   }
 };
