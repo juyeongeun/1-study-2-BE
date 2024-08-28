@@ -2,8 +2,8 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const setPoint = async (req, res) => {
-  const { studyId: id } = req.params;
-  const { point } = req.body;
+  const id = parseInt(req.params.studyId);
+  const point = parseInt(req.body.point);
 
   try {
     await prisma.$transaction(async (prisma) => {
