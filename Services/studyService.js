@@ -72,6 +72,9 @@ export const getStudyById = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const study = await prisma.study.findUnique({
     where: { id: parseInt(id) },
+    include: {
+      reaction: true,
+    },
   });
   if (!study) return res.status(404).json({ error: 'study not found' });
   res.status(200).json(study);
