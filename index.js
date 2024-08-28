@@ -6,6 +6,7 @@ import studyRoutes from "./routes/study.js";
 import completeHabitRoutes from "./routes/completeHabit.js";
 import habitRoutes from "./routes/habit.js";
 import reactionRoutes from "./routes/reaction.js";
+import focusRoutes from "./routes/focus.js";
 import "./Services/habitCronJobs.js";
 process.env.TZ = "Asia/Seoul";
 
@@ -38,6 +39,7 @@ app.use("/api/studies", studyRoutes);
 app.use("/api/completeHabits", completeHabitRoutes);
 app.use("/api/habits", habitRoutes);
 app.use("/api/reactions", reactionRoutes);
+app.use("/api/focus", focusRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
