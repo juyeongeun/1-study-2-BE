@@ -33,10 +33,10 @@ export const getStudies = asyncHandler(async (req, res) => {
       orderByClause = { createdAt: 'asc' };
       break;
     case 'highestPoints':
-      orderByClause = { point: 'desc', createdAt: 'desc' };
+      orderByClause = [{ point: 'desc' }, { createdAt: 'desc' }];
       break;
     case 'lowestPoints':
-      orderByClause = { point: 'asc', createdAt: 'desc' };
+      orderByClause = [{ point: 'asc' }, { createdAt: 'desc' }];
       break;
   }
 
