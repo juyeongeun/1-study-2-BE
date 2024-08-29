@@ -27,7 +27,7 @@ export const getStudies = asyncHandler(async (req, res) => {
   let orderByClause;
   switch (orderBy) {
     case 'recent':
-      orderByClause = [{ createdAt: 'desc' }, { id: 'desc' }];
+      orderByClause = [{ createdAt: 'desc' }, { id: 'asc' }];
       break;
     case 'old':
       orderByClause = [{ createdAt: 'asc' }, { id: 'asc' }];
@@ -36,7 +36,7 @@ export const getStudies = asyncHandler(async (req, res) => {
       orderByClause = [{ point: 'desc' }, { createdAt: 'asc' }, { id: 'asc' }];
       break;
     case 'lowestPoints':
-      orderByClause = [{ point: 'asc' }, { createdAt: 'desc' }, { id: 'desc' }];
+      orderByClause = [{ point: 'asc' }, { createdAt: 'desc' }, { id: 'asc' }];
       break;
   }
 
