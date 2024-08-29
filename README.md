@@ -238,6 +238,58 @@
 
 
 ## 파일구조
+```
+.
+├── Common
+│   └── asyncHandler.js
+├── README.md
+├── Services
+│   ├── completeHabitService.js
+│   ├── focusService.js
+│   ├── habitCronJobs.js
+│   ├── habitService.js
+│   ├── reactionService.js
+│   └── studyService.js
+├── index.js
+├── package-lock.json
+├── package.json
+├── prisma
+│   ├── migrations
+│   │   ├── 20240813070652_create_study_table
+│   │   │   └── migration.sql
+│   │   ├── 20240813072743_edit
+│   │   │   └── migration.sql
+│   │   ├── 20240813084010_edit_point_default_value
+│   │   │   └── migration.sql
+│   │   ├── 20240814021237_create_reaction
+│   │   │   └── migration.sql
+│   │   ├── 20240814021706_edit_reaction
+│   │   │   └── migration.sql
+│   │   ├── 20240814022007_edit_reaction
+│   │   │   └── migration.sql
+│   │   ├── 20240814023809_edit_schema
+│   │   │   └── migration.sql
+│   │   ├── 20240814053215_edit_schema
+│   │   │   └── migration.sql
+│   │   ├── 20240814053900_edit_study_created_at
+│   │   │   └── migration.sql
+│   │   ├── 20240816012112_edit_habit
+│   │   │   └── migration.sql
+│   │   ├── 20240819013213_setting_ondelete
+│   │   │   └── migration.sql
+│   │   ├── 20240820091100_edit_habit_schema
+│   │   │   └── migration.sql
+│   │   └── migration_lock.toml
+│   ├── schema.prisma
+│   └── seed.js
+├── routes
+│   ├── completeHabit.js
+│   ├── focus.js
+│   ├── habit.js
+│   ├── reaction.js
+│   └── study.js
+└── test.http
+```
 
 ## 구현 홈페이지
 
