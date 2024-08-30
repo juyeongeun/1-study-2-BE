@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import asyncHandler from "../Common/asyncHandler.js";
+import { PrismaClient } from '@prisma/client';
+import asyncHandler from '../Common/asyncHandler.js';
 
 const prisma = new PrismaClient();
 
@@ -20,22 +20,22 @@ export const createStudy = asyncHandler(async (req, res) => {
 
 // 스터디 조회하기
 export const getStudies = asyncHandler(async (req, res) => {
-  const { orderBy = "recent", keyword, offset = 0, limit = 6 } = req.query;
+  const { orderBy = 'recent', keyword, offset = 0, limit = 6 } = req.query;
 
   // 정렬 기준 설정
   let orderByClause;
   switch (orderBy) {
-    case "recent":
-      orderByClause = { createdAt: "desc" };
+    case 'recent':
+      orderByClause = [{ createdAt: 'desc' }, { id: 'asc' }];
       break;
-    case "old":
-      orderByClause = { createdAt: "asc" };
+    case 'old':
+      orderByClause = [{ createdAt: 'asc' }, { id: 'asc' }];
       break;
-    case "highestPoints":
-      orderByClause = { point: "desc" };
+    case 'highestPoints':
+      orderByClause = [{ point: 'desc' }, { createdAt: 'asc' }, { id: 'asc' }];
       break;
-    case "lowestPoints":
-      orderByClause = { point: "asc" };
+    case 'lowestPoints':
+      orderByClause = [{ point: 'asc' }, { createdAt: 'desc' }, { id: 'asc' }];
       break;
   }
 
@@ -43,9 +43,9 @@ export const getStudies = asyncHandler(async (req, res) => {
   const where = keyword
     ? {
         OR: [
-          { name: { contains: keyword, mode: "insensitive" } },
-          { studyName: { contains: keyword, mode: "insensitive" } },
-          { content: { contains: keyword, mode: "insensitive" } },
+          { name: { contains: keyword, mode: 'insensitive' } },
+          { studyName: { contains: keyword, mode: 'insensitive' } },
+          { content: { contains: keyword, mode: 'insensitive' } },
         ],
       }
     : {};
@@ -62,7 +62,7 @@ export const getStudies = asyncHandler(async (req, res) => {
       reaction: true,
     },
   });
-  console.log("Fetched studies:", study);
+  console.log('Fetched studies:', study);
   res.status(200).json({ study, totalCount });
 });
 
@@ -71,8 +71,11 @@ export const getStudyById = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const study = await prisma.study.findUnique({
     where: { id: parseInt(id) },
+    include: {
+      reaction: true,
+    },
   });
-  if (!study) return res.status(404).json({ error: "study not found" });
+  if (!study) return res.status(404).json({ error: 'study not found' });
   res.status(200).json(study);
 });
 
@@ -84,7 +87,7 @@ export const updateStudy = asyncHandler(async (req, res) => {
     where: { id: parseInt(id) },
     data: { name, studyName, content, background, password },
   });
-  if (!study) return res.status(404).json({ error: "study not found" });
+  if (!study) return res.status(404).json({ error: 'study not found' });
   res.status(200).json(study);
 });
 
