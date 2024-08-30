@@ -1,6 +1,0 @@
-POST https://study-api-m36o.onrender.com/api/focus/58
-Content-Type : application/json
-
-{
-    "point" : 30
-}

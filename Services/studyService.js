@@ -23,7 +23,6 @@ export const getStudies = asyncHandler(async (req, res) => {
   const { orderBy = "recent", keyword, offset = 0, limit = 6 } = req.query;
 
   // 정렬 기준 설정
-
   let orderByClause;
   switch (orderBy) {
     case "recent":

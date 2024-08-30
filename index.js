@@ -28,7 +28,7 @@ app.get("/check-db", async (req, res) => {
     await prisma.$connect();
     res.status(200).json({ message: "Database connected successfully" });
   } catch (error) {
-    console.error("Database connection failed:", error); // 오류 로그 출력
+    console.error("Database connection failed:", error);
     res.status(500).json({ message: "Database connection failed", error });
   } finally {
     await prisma.$disconnect();
@@ -41,6 +41,7 @@ app.use("/api/habits", habitRoutes);
 app.use("/api/reactions", reactionRoutes);
 app.use("/api/focus", focusRoutes);
 
+//test url
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
