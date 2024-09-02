@@ -306,8 +306,7 @@
 │   │   ├── 20240820091100_edit_habit_schema
 │   │   │   └── migration.sql
 │   │   └── migration_lock.toml
-│   ├── schema.prisma
-│   └── seed.js
+│   └── schema.prisma
 └── routes
     ├── completeHabit.js
     ├── focus.js
