@@ -282,18 +282,17 @@
 │   │   └── migration_lock.toml
 │   ├── schema.prisma
 │   └── seed.js
-├── routes
-│   ├── completeHabit.js
-│   ├── focus.js
-│   ├── habit.js
-│   ├── reaction.js
-│   └── study.js
-└── test.http
+└── routes
+    ├── completeHabit.js
+    ├── focus.js
+    ├── habit.js
+    ├── reaction.js
+    └── study.js
 ```
 
 ## 구현 홈페이지
 
-[공부의 숲](https://main--gatherstudy.netlify.app/)
+[공부의 숲](https://gatherstudy.netlify.app/)
 
 ## 프로젝트 회고록
 
