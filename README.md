@@ -4,6 +4,8 @@
 
 [📄 FE 레포지토리](https://github.com/juyeongeun/1-study-2-FE)
 
+[🎥 시연 영상](https://drive.google.com/file/d/1TO9ix-gTh6yEhCD4hG1FN4LLTLhIcP4U/view?usp=drive_link)
+
 <br><br>
 
 ## 팀원 구성
